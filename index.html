@@ -1,0 +1,203 @@
+<!--
+A writer wants to sell his ebook online and is asking for your help.
+
+Here is what he needs:
+
+  - When the user clicks the button "Add to my cart", it adds one item to "Shopping Cart". (simply increment the items quantity in the Shopping Cart).
+
+  - When the user clicks the button "Remove", it removes one item from the Shopping Cart. (simply decrement the items quantity in the Shopping Cart).
+
+  - The writer also needs a little bit of styling to his page. The book's title and author's name above the image would be nice. He also wants the "Add" button aligned to the right, and the "Remove" button aligned to the left. Finally, he wants the "Shopping Cart"  to appear as a small box, with a background color, and aligned to the right at the top of the page.
+
+-->
+
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Shopping Cart - React App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"> 
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@500&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/react/umd/react.production.min.js" crossorigin></script>
+
+<script
+  src="https://unpkg.com/react-dom/umd/react-dom.production.min.js"
+  crossorigin></script>
+
+<!-- <script
+  src="https://unpkg.com/react-bootstrap@next/dist/react-bootstrap.min.js"
+  crossorigin></script> -->
+  </head>
+  <body>
+    
+
+    <div id="root"></div>
+
+
+    <script type="text/jsx">
+
+    
+      const Cart = (props) => ( 
+        <div
+          className="cartContainer"
+          style={{
+            height: "3em",
+            display: "flex",
+            marginBottom: "2em"
+          }}
+        >
+          <div
+            style={{
+              width: "75vw",
+              height: "3em"
+            }}
+          >
+            </div>
+          <div
+            style={{
+              
+              textAlign: "center",
+              padding: ".5em",
+              width: "15em",
+              height: "1.25em",
+              fontSize: "1.1rem",
+              backgroundColor: "#454645",
+              color: "white"
+            }} 
+          >
+            Shopping Cart : {props.state}
+          </div>
+      </div>
+      );
+
+
+
+      const Product = () => (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            marginTop: "1em",
+            marginBottom: "1em"
+        }}
+        >
+          <h1
+            style={{
+              fontSize: "2rem",
+              margin: "0 auto",
+              letterSpacing: ".4rem",
+              textTransform: "uppercase",
+              marginBottom: ".9em",
+              width: "85vw"
+            }}
+          >
+            Sapiens: A Brief History of Humankind,
+            by Yuval Noah Harari
+          </h1>
+
+            <img 
+              src="https://kbimages1-a.akamaihd.net/7458e168-e850-4e06-bf25-ce54072d5180/353/569/90/False/sapiens-2.jpg" 
+              alt="Sapiens" 
+              style={{
+                width: "50vw",
+                margin: "0 auto"
+              }}
+            />
+        </div>
+      );
+
+
+
+      const ActionBar = (props) => {
+
+        return (
+          <div
+            style={{
+              justifyContent: "space-between",
+              width: "100wv",
+              display: "flex"
+            }}
+          >
+            
+              <button
+                onClick={props.onClickDecrement}
+                style={{
+                  backgroundColor: "#454645",
+                  color: "white",
+                  border: "none",
+                  fontFamily: "inherit",
+                  fontSize: ".9rem",
+                  padding: ".2em"
+                }}
+              > 
+                Remove
+              </button>
+
+              <button
+                onClick={props.onClickIncrement}
+                style={{
+                  backgroundColor: "green",
+                  color: "white",
+                  border: "none",
+                  fontFamily: "inherit",
+                  fontSize: "1.1rem",
+                  padding: ".5em"
+                }}
+              > 
+                Add To My Cart
+              </button>
+
+          </div>
+        );
+      }
+      
+
+
+      const App = () => {
+        const [cartQuantity, setCartQuantity] = React.useState(0);
+        
+        const handleClickIncrement = () => {
+          if (cartQuantity >= 0) {
+            setCartQuantity(cartQuantity + 1)
+          } else {
+            return
+          }
+        }
+
+        const handleClickDecrement = () => {  
+          if (cartQuantity > 0) {
+            setCartQuantity(cartQuantity - 1)
+          } else {
+            return
+          }
+        }
+
+        return (
+          <div
+            style={{
+              fontFamily: "'Raleway', sans-serif",
+              margin: "0 auto",
+              textAlign: "center"
+            }}
+          >
+            <Cart state={cartQuantity}/>
+            <Product />
+            <ActionBar onClickIncrement={handleClickIncrement} onClickDecrement={handleClickDecrement}/>
+          </div>
+        );
+      };
+
+
+
+      ReactDOM.render(
+        <App />,
+        document.getElementById('root')
+      );
+
+
+    </script>
+  </body>
+</html>
