@@ -40,22 +40,23 @@ Here is what he needs:
     <script type="text/jsx">
 
     
+      
       const Cart = (props) => ( 
         
         <div
             style={{
               textAlign: "center",
               padding: ".5em",
-              width: `${props.style.width}`,
+              width: "10em",
               height: "1.25em",
-              fontSize: `${props.style.fontSize}`,
+              fontSize: "1rem",
               backgroundColor: "#454645",
               color: "white",
-              position: "absolute",
-              top: "5",
-              left: `${props.style.left}`
+              position: "sticky",
+              float: "right"
             }} 
           >
+          
             Shopping Cart : {props.state}
         </div>
       );
@@ -90,6 +91,7 @@ Here is what he needs:
               alt="Sapiens" 
               style={{
                 width: "50vw",
+                height: "100%",
                 margin: "0 auto"
               }}
             />
@@ -101,7 +103,6 @@ Here is what he needs:
       const ActionBar = (props) => {
 
         const [cartQuantity, setCartQuantity] = React.useState(0);
-        const [cartStyle, setCartStyle] = React.useState({width:"10em", fontSize: "1.1rem", left: "75%"});
 
         const handleClickIncrement = () => {
           if (cartQuantity >= 0) {
@@ -128,7 +129,17 @@ Here is what he needs:
               margin: "0 auto"
             }}
           >
-            <Cart state={cartQuantity} style={cartStyle}/>
+
+            <div
+              style={{
+                position: "absolute",
+                top: "1em",
+                width: "95vw"
+              }}
+            >
+              <Cart state={cartQuantity}/>
+            </div>
+
               <button
                 onClick={handleClickDecrement}
                 style={{
@@ -185,7 +196,6 @@ Here is what he needs:
         <App />,
         document.getElementById('root')
       );
-
 
     </script>
   </body>
